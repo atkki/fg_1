@@ -1,0 +1,7 @@
+[requires]
+libjpeg-turbo/2.1.4
+libpng/1.6.39
+
+[generators]
+cmake_find_package
+cmake_paths
