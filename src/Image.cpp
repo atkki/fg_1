@@ -81,6 +81,7 @@ void Image::openJPG(const std::string& path)
 void Image::traverse(const std::function<void(int, int)>& callable, int startRange, int endRange)
 {
 	if (endRange == 0) endRange = m_width;
+	
 	for (int i{ 0 }; i < m_height; ++i)
 	{
 		for (int j{ startRange }; j < endRange; ++j)
@@ -88,29 +89,6 @@ void Image::traverse(const std::function<void(int, int)>& callable, int startRan
 			callable(i, j);
 		}
 	}
-}
-
-void Image::createPalette()
-{
-	std::unordered_map<Pixel, bool, PixelHashFn> pixelCache{};
-
-	this->traverse([&](int i, int j) {
-		Pixel pixel{ this->getPixel(i, j) };
-		if (pixelCache.count(pixel) == 0) {
-			pixelCache[pixel] = true;
-		}
-	});
-
-	std::vector<Pixel> palette;
-	palette.reserve(pixelCache.size());
-
-	for (auto pair : pixelCache)
-	{
-		palette.push_back(pair.first);
-	}
-
-	m_palette = palette;
-	m_colorCount = static_cast<int>(pixelCache.size());
 }
 
 // C code here for sake of compatibility with libpng

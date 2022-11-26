@@ -2,8 +2,11 @@
 
 project ("fg_1")
 
+#flags setup 
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Ox")
+
 # src
-file (GLOB SRC "src/Image.h" "src/Image.cpp" "src/main.cpp")
+file (GLOB SRC "src/*.h" "src/*.cpp")
 
 # conan setup
 include(conan.cmake)
